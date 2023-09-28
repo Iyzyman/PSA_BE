@@ -1,0 +1,24 @@
+name: VM_BE_deploy
+on: 
+  workflow_dispatch:
+
+jobs:
+  build-and-push: 
+    name: Push to VM and deploy
+    runs-on: ubuntu-latest 
+    environment: development
+    steps:
+        
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.VM_HOST }}
+        username: ${{ secrets.VM_USER }}
+        password: ${{ secrets.VM_PASSWORD }}
+        port: ${{ secrets.VM_PORT }}
+        script: |
+          cd PSA_BE
+          git pull origin
+          npm install
+          npm run build
+          pm2 start backend
