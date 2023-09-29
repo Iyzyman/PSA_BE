@@ -22,11 +22,9 @@ export class ProductsController {
     @Body('toLoc') toLoc: string,
     @Body('cargoSize') cargoSize: number,
   ) {
-    const email = ''
     const generatedId = this.listingService.insertListing(
       title,
       desc,
-      email,
       fromLoc,
       toLoc,
       cargoSize,
@@ -36,17 +34,17 @@ export class ProductsController {
   }
 
   @Get()
-  getAllProducts() {
+  getAllListings() {
     return this.listingService.getListings();
   }
 
   @Get(':id')
-  getProduct(@Param('id') listingId: string) {
+  getListing(@Param('id') listingId: string) {
     return this.listingService.getSingleListing(listingId);
   }
 
   @Patch(':id')
-  updateProduct(
+  updateListing(
     @Param('id') listingId: string,
     @Body('title') title: string,
     @Body('description') desc: string,
@@ -59,8 +57,8 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  removeProduct(@Param('id') prodId: string) {
-      this.listingService.deleteProduct(prodId);
+  removeListing(@Param('id') prodId: string) {
+      this.listingService.deleteListing(prodId);
       return null;
   }
 }
