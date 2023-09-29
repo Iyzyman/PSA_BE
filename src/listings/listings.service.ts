@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable} from '@nestjs/common';
 import { Supabase } from 'src/supabase/supabase';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class ListingsService {
         if (error){
             throw error
         }
-        return 'success'
+        return data
     }
 
     async getListings(): Promise<any[]> {
@@ -39,7 +39,7 @@ export class ListingsService {
     async getSingleListing(listingId: string): Promise<any[]> {
         const client = this.supabase.getClient();
         const { data, error} = await client
-        .from('listing')
+        .from('listings')
         .select('*')
         .eq("id", listingId)
         if (error){
@@ -57,7 +57,7 @@ export class ListingsService {
         if (error){
             throw error
         }
-        return 'success'
+        return data
     }
 
     async deleteListing(listingId: string): Promise<string> {
@@ -69,6 +69,6 @@ export class ListingsService {
         if (error){
             throw error
         }
-        return 'success'
+        return data
     }
 }
