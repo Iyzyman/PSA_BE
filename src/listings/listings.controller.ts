@@ -16,18 +16,26 @@ export class ListingsController {
 
   @Post()
   insertListing(
-    @Body('title') title: string,
-    @Body('description') desc: string,
-    @Body('fromLoc') fromLoc: string,
-    @Body('toLoc') toLoc: string,
+    @Body('account') account: string,
     @Body('cargoSize') cargoSize: number,
+    @Body('loadPort') loadPort: string,
+    @Body('destPort') destPort: string,
+    @Body('leaveDate') leaveDate: Date,
+    @Body('reachDate') reachDate: Date,
+    @Body('containerType') containerType: string,
+    @Body('typeDangGoods') typeDangGoods: string,
+    @Body('price') price: number
   ) {
     const generatedId = this.listingService.insertListing(
-      title,
-      desc,
-      fromLoc,
-      toLoc,
+      account,
       cargoSize,
+      loadPort,
+      destPort,
+      leaveDate,
+      reachDate,
+      containerType,
+      typeDangGoods,
+      price,
     );
 
     return { id: generatedId };
@@ -46,13 +54,28 @@ export class ListingsController {
   @Patch(':id')
   updateListing(
     @Param('id') listingId: string,
-    @Body('title') title: string,
-    @Body('description') desc: string,
-    @Body('fromLoc') fromLoc: string,
-    @Body('toLoc') toLoc: string,
-    @Body('cargoSize') cargoSize: number
+    @Body('account') account: string,
+    @Body('cargoSize') cargoSize: number,
+    @Body('loadPort') loadPort: string,
+    @Body('destPort') destPort: string,
+    @Body('leaveDate') leaveDate: Date,
+    @Body('reachDate') reachDate: Date,
+    @Body('containerType') containerType: string,
+    @Body('typeDangGoods') typeDangGoods: string,
+    @Body('price') price: number
   ) {
-    this.listingService.updateListing(listingId, title, desc, fromLoc, toLoc, cargoSize);
+    this.listingService.updateListing(
+      listingId,
+      account,
+      cargoSize,
+      loadPort,
+      destPort,
+      leaveDate,
+      reachDate,
+      containerType,
+      typeDangGoods,
+      price,
+    );
     return null;
   }
 
