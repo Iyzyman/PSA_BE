@@ -19,8 +19,7 @@ export class AppService {
     // Query the "listing" table
     const { data, error } = await client
       .from('listings')
-      .select('title')
-      .eq('title', 'Test1');
+      .select('*')
     if (error) {
       throw error;
     }
