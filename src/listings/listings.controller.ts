@@ -10,8 +10,8 @@ import {
 
   import { ListingsService } from './listings.service';
 
-  @Controller('listings')
-export class ProductsController {
+@Controller('/api/v1/listings')
+export class ListingsController {
   constructor(private readonly listingService: ListingsService) {}
 
   @Post()

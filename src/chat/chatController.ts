@@ -7,10 +7,10 @@ export class ChatController {
 
   @Get()
   async getAllChatMessages(
-    @Query('senderEmail') senderId: string,
-    @Query('receiverEmail') receiverId: string,
+    @Query('senderEmail') senderEmail: string,
+    @Query('receiverEmail') receiverEmail: string,
   ): Promise<any[]> {
-    return this.chatService.getAllChatMessages(senderId, receiverId);
+    return this.chatService.getAllChatMessages(senderEmail, receiverEmail);
   }
   
 
