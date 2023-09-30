@@ -75,7 +75,7 @@ export class AppService {
       // Calculate the percentage
       const percentageSold = (soldCargoSize / totalCargoSize) * 100;
       // Use the percentageSold value as needed
-      return percentageSold
+      return {'soldCargoSize': soldCargoSize, 'totalCargoSize': totalCargoSize, 'percentage': percentageSold}
         }
   }
 
