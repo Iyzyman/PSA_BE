@@ -22,7 +22,7 @@ jobs:
           USER_NAME: ${{ secrets.VM_USER }}
         run: |
           sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no ${USER_NAME}@${HOSTNAME} '
-            cd /home/ubuntu/PSA_BE &&
+            cd PSA_BE &&
             git pull origin main &&
             sudo npm install &&
             sudo npm run build &&
