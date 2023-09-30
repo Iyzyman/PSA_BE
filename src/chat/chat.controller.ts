@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query} from '@nestjs/common';
 import { ChatService } from './chat.service';
 
-@Controller('chat')
+@Controller('/api/v1/chat')
 export class ChatController {
   constructor(private readonly chatService: ChatService) {}
 
@@ -16,6 +16,13 @@ export class ChatController {
 
   @Post()
   async createChatMessage(@Body() messageData: { senderEmail: string, receiverEmail: string, messageContent: string }): Promise<any> {
+    console.log(this.chatService)
     return this.chatService.createChatMessage(messageData);
+  }
+  @Get('list')
+  async getChatList(
+    @Query('Email') Email: string,
+  ): Promise<any[]> {
+    return this.chatService.getChatList(Email);
   }
 }
