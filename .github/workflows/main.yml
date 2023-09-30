@@ -1,27 +1,31 @@
-name: VM_BE_deploy
-on: 
-  workflow_dispatch:
+name: Deploy
+
+on:
+  workflow_dispatch
 
 jobs:
-  build-and-push: 
-    name: Push to VM and deploy
-    runs-on: ubuntu-latest 
+  Deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    
     steps:
-        
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ec2-54-169-206-36.ap-southeast-1.compute.amazonaws.com
-        username: ubuntu
-        password: psapineapple123*
-        port: 22
-        script: |
-          whoami
-          ls
-          cd PSA_BE
-          git pull origin main
-          npm install
-          npm run build
-          pm2 restart backend
-        
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Deploy code
+        env:
+          PASSWORD: ${{ secrets.VM_PASSWORD }}
+          HOSTNAME: ${{ secrets.VM_HOST }}
+          USER_NAME: ${{ secrets.VM_USER }}
+        run: |
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no ${USER_NAME}@${HOSTNAME} '
+            cd /home/ubuntu/PSA_BE &&
+            git pull origin main &&
+            sudo npm install &&
+            sudo npm run build &&
+            sudo pm2 restart backend
+          '
 
