@@ -10,7 +10,7 @@ import {
 
   import { ListingsService } from './listings.service';
 
-@Controller('/api/v1/listings')
+@Controller('api/v1/listings')
 export class ListingsController {
   constructor(private readonly listingService: ListingsService) {}
 
