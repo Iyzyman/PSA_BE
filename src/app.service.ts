@@ -45,4 +45,16 @@ export class AppService {
 
     return data
   }
+
+  async getTotalRevenue(): Promise<any>{
+    const client = this.supabase.getClient()
+    //const { data: { user } } = await client.auth.getUser()
+    const { data, error } = await client.rpc('get_revenue_and_change', {
+      email: "xiezijian99@gmail.com"
+    })
+    if (error) {
+      throw error;
+    }
+    return data
+  }
 }

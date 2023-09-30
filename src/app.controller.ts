@@ -17,6 +17,13 @@ export class AppController {
 
   @Get('ports')
   getPorts() {
-    return this.appService.getPorts();
+    //return this.appService.getPorts();
+    return " hehe"
   }
+
+  @Get('totalRevenue')
+  getTotalRevenue() {
+    return this.appService.getTotalRevenue();
+  }
+
 }
