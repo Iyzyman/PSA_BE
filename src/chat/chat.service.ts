@@ -22,12 +22,9 @@ export class ChatService {
 
     return data;
   }
-
-
   async createChatMessage(messageData: { senderEmail: string, receiverEmail: string, messageContent: string }): Promise<any> {
     const client = this.supabase.getClient();
-
-    // Replace 'chat_messages' with your actual table name
+    console.log(messageData)
     const { data, error } = await client.from('Chat').upsert(messageData);
 
     if (error) {
