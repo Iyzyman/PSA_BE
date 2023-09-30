@@ -20,6 +20,6 @@ jobs:
           git pull origin main
           npm install
           npm run build
-          pm2 start backend
+          pm2 restart backend
         
 
