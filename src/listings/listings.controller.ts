@@ -16,6 +16,7 @@ export class ListingsController {
 
   @Post()
   insertListing(
+    @Body('leasingOwner') leasingOwner: string,
     @Body('account') account: string,
     @Body('cargoSize') cargoSize: number,
     @Body('loadPort') loadPort: string,
@@ -27,6 +28,7 @@ export class ListingsController {
     @Body('price') price: number
   ) {
     const generatedId = this.listingService.insertListing(
+      leasingOwner,
       account,
       cargoSize,
       loadPort,

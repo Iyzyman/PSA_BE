@@ -5,12 +5,11 @@ import { Supabase } from 'src/supabase/supabase';
 export class ListingsService {
     constructor(private readonly supabase: Supabase) {}
 
-    async insertListing(account: string, cargoSize: number, loadPort: string, destPort: string,
+    async insertListing(leasingOwner: string, account: string, cargoSize: number, loadPort: string, destPort: string,
                         leaveDate: Date, reachDate: Date, containerType: string, typeDangGoods: string, price: number): Promise<string> {
         const client = this.supabase.getClient();
-        const { data: { user } } = await client.auth.getUser()
         const newData = {
-            leasingOwner: user.email,
+            leasingOwner: leasingOwner,
             account: account,
             cargoSize: cargoSize,
             loadPort: loadPort,
