@@ -16,10 +16,14 @@ jobs:
         password: ${{ secrets.VM_PASSWORD }}
         port: ${{ secrets.VM_PORT }}
         script: |
-          cd PSA_BE
+          whoami
+          ls
           git pull origin main
+          sudo apt install -y nodejs
+          sudo apt install -y npm
           npm install
           npm run build
-          pm2 start backend
+          npm install pm2 -g
+          pm2 restart backend
         
 
