@@ -5,9 +5,18 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): Promise<string> {
-    console.log('retrived');
-    return this.appService.getHello();
+  @Get('typeGoods')
+  getGoods() {
+    return this.appService.getGoodTypes();
+  }
+  
+  @Get('typeContainers')
+  getContainers() {
+    return this.appService.getContainerTypes();
+  } 
+
+  @Get('ports')
+  getPorts() {
+    return this.appService.getPorts();
   }
 }

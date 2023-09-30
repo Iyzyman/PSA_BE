@@ -6,27 +6,43 @@ import { Supabase } from './supabase/supabase';
 export class AppService {
   constructor(private readonly supabase: Supabase) {}
 
-  async getHello(): Promise<string> {
+  async getGoodTypes(): Promise<any> {
     const client = this.supabase.getClient();
-    // const newData = {
-    //   id: 2,
-    //   title: 'hello',
-    //   description: 'test',
-    //   author: 'test',
-    //   fromLOC: 'shanghai',
-    //   toLOC: 'kl',
-    // };
-    // Query the "listing" table
     const { data, error } = await client
-      .from('listings')
-      .select('*')
+      .from('typeGoods')
+      .select('type')
+    if (error) {
+      throw error;
+    } 
+    let result = data.map(a => a.type)
+    console.log(result);
+
+    return data
+  }
+
+  async getContainerTypes(): Promise<any> {
+    const client = this.supabase.getClient();
+    const { data, error } = await client
+      .from('typeContainers')
+      .select('type')
+    if (error) {
+      throw error;
+    }
+    let result = data.map(a => a.type)
+    console.log(result);
+
+    return data
+  }
+
+  async getPorts(): Promise<any> {
+    const client = this.supabase.getClient();
+    const { data, error } = await client
+      .from('ports')
+      .select('UNLocode, name')
     if (error) {
       throw error;
     }
 
-    // 'data' now contains the results of your query
-    console.log(data);
-
-    return 'Hello World!';
+    return data
   }
 }
