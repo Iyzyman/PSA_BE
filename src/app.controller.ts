@@ -19,4 +19,19 @@ export class AppController {
   getPorts() {
     return this.appService.getPorts();
   }
+
+  @Get('get/totalRevenue')
+  getTotalRevenue() {
+    return this.appService.getTotalRevenue();
+  }
+
+  @Get('get/utilization')
+  getUtilization() {
+    return this.appService.getUtilization();
+  }
+
+  @Get('get/dataPriceTrend')
+  getTrends(){
+    return this.appService.getTrends();
+  }
 }
