@@ -20,7 +20,7 @@ jobs:
           cd PSA_BE
           git pull origin main
           sudo apt install -y nodejs
-          sudo apt install -y nvm
+          sudo apt install -y npm
           npm install pm2 -g
           npm install
           npm run build
