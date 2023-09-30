@@ -13,7 +13,7 @@ export class AppService {
       .select('type')
     if (error) {
       throw error;
-    }
+    } 
     let result = data.map(a => a.type)
     console.log(result);
 

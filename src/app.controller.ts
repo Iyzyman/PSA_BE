@@ -13,7 +13,7 @@ export class AppController {
   @Get('typeContainers')
   getContainers() {
     return this.appService.getContainerTypes();
-  }
+  } 
 
   @Get('ports')
   getPorts() {
