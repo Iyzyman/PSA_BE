@@ -17,13 +17,13 @@ jobs:
         port: ${{ secrets.VM_PORT }}
         script: |
           whoami
-          cd PSA_BE
+          ls
           git pull origin main
           sudo apt install -y nodejs
           sudo apt install -y npm
-          npm install pm2 -g
           npm install
           npm run build
+          npm install pm2 -g
           pm2 restart backend
         
 
