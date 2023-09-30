@@ -142,4 +142,24 @@ export class AppService {
     return {'revenue': totalRevenue, 'percentage': percentChange, }
   }
   }
+
+  async getTransactionHistory(): Promise<any>{
+    const client = this.supabase.getClient()
+    const { data, error } = await client
+    .from('listings')
+    .select('sold, account, price')
+    .eq('leasingOwner', 'xiezijian99@gmail.com')
+    if (error){
+      throw error
+    }
+    const transformedData = data.map((item) => {
+      const { sold, ...rest } = item; // Destructure 'sold' property and capture the rest
+      return {
+        ...rest, // Include the rest of the properties
+        status: sold ? "completed" : "pending",
+      };
+    });
+    
+    return transformedData
+  }
 }

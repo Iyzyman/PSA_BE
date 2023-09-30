@@ -34,4 +34,9 @@ export class AppController {
   getTrends(){
     return this.appService.getTrends();
   }
+
+  @Get('get/transactionHistory')
+  getTransactionHistory(){
+    return this.appService.getTransactionHistory();
+  }
 }
