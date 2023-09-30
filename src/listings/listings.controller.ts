@@ -80,8 +80,15 @@ export class ListingsController {
   }
 
   @Delete(':id')
-  removeListing(@Param('id') prodId: string) {
-      this.listingService.deleteListing(prodId);
+  removeListing(@Param('id') listingId: string) {
+      this.listingService.deleteListing(listingId);
       return null;
   }
+
+  @Patch('/sell/:id')
+  sellListing(@Param('id') listingId: string) {
+    this.listingService.sellListing(listingId);
+    return null;
+  }
+
 }
