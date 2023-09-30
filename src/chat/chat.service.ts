@@ -10,18 +10,20 @@ type Chat = {
   receiverEmail: string;
   messageContent: string;
   timestamp: any;
+  listingId: number;
 };
 @Injectable()
 export class ChatService {
   constructor(private readonly supabase: Supabase) {}
 
-  async getAllChatMessages(senderEmail: string, receiverEmail: string): Promise<any[]> {
+  async getAllChatMessages(senderEmail: string, receiverEmail: string,listingId:number): Promise<any[]> {
     const client = this.supabase.getClient();
 
     // Replace 'chat_messages' with your actual table name
     const { data, error } = await client
       .from('Chat')
       .select('*')
+      .eq('listingId',listingId)
       .eq('senderEmail', senderEmail) // Filter by sender ID
       .eq('receiverEmail', receiverEmail) // Filter by receiver ID
       .order('timestamp', { ascending: true });
@@ -29,6 +31,7 @@ export class ChatService {
       const { data: data2, error: error2 } = await client
       .from('Chat')
       .select('*')
+      .eq('listingId',listingId)
       .eq('senderEmail', receiverEmail) // Filter by sender ID
       .eq('receiverEmail', senderEmail) // Filter by receiver ID
       .order('timestamp', { ascending: true });
@@ -70,21 +73,20 @@ export class ChatService {
     }
   
     const userMessagesMap: Map<string, Message> = new Map();
-    console.log(data)
     // Assuming data and Email are properly defined earlier in your code
     data.forEach((chat) => {
       // Check if senderEmail is not the same as the specified Email and if it's not already in the map
        // @ts-ignore
       if (chat.senderEmail !== Email && !userMessagesMap.has(chat.senderEmail)) {
          // @ts-ignore
-        userMessagesMap.set(chat.senderEmail, {senderEmail: chat.senderEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,
+        userMessagesMap.set(chat.listingId, {senderEmail: chat.senderEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId
         });
       }
       // Check if receiverEmail is not the same as the specified Email and if it's not already in the map
        // @ts-ignore
       if (chat.receiverEmail !== Email && !userMessagesMap.has(chat.receiverEmail)) {
          // @ts-ignore
-        userMessagesMap.set(chat.receiverEmail, {senderEmail: chat.receiverEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,
+        userMessagesMap.set(chat.listingId, {senderEmail: chat.receiverEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId
         });
       }
     });

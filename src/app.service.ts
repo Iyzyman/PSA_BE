@@ -24,8 +24,6 @@ export class AppService {
       throw error;
     }
 
-    // 'data' now contains the results of your query
-    console.log(data);
 
     return 'Hello World!';
   }

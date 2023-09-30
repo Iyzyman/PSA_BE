@@ -9,14 +9,14 @@ export class ChatController {
   async getAllChatMessages(
     @Query('senderEmail') senderEmail: string,
     @Query('receiverEmail') receiverEmail: string,
+    @Query('listingId') listingId: number,
   ): Promise<any[]> {
-    return this.chatService.getAllChatMessages(senderEmail, receiverEmail);
+    return this.chatService.getAllChatMessages(senderEmail, receiverEmail,listingId);
   }
   
 
   @Post()
   async createChatMessage(@Body() messageData: { senderEmail: string, receiverEmail: string, messageContent: string }): Promise<any> {
-    console.log(this.chatService)
     return this.chatService.createChatMessage(messageData);
   }
   @Get('list')
