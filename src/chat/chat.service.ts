@@ -75,18 +75,21 @@ export class ChatService {
     const userMessagesMap: Map<string, Message> = new Map();
     // Assuming data and Email are properly defined earlier in your code
     data.forEach((chat) => {
+      // @ts-ignore
+      const chatKey = `${chat.listingId}-${chat.senderEmail}`;
       // Check if senderEmail is not the same as the specified Email and if it's not already in the map
        // @ts-ignore
-      if (chat.senderEmail !== Email && !userMessagesMap.has(chat.senderEmail)) {
+      if (chat.senderEmail !== Email && !userMessagesMap.has(`${chat.listingId}-${chat.senderEmail}`)) {
+        
          // @ts-ignore
-        userMessagesMap.set(chat.listingId, {senderEmail: chat.senderEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId
+        userMessagesMap.set(chatKey, {id:chat.id,senderEmail: chat.senderEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId
         });
       }
       // Check if receiverEmail is not the same as the specified Email and if it's not already in the map
        // @ts-ignore
-      if (chat.receiverEmail !== Email && !userMessagesMap.has(chat.receiverEmail)) {
+      if (chat.receiverEmail !== Email && !userMessagesMap.has(`${chat.listingId}-${chat.receiverEmail}`)) {
          // @ts-ignore
-        userMessagesMap.set(chat.listingId, {senderEmail: chat.receiverEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId
+        userMessagesMap.set(chatKey, {id:chat.id,senderEmail: chat.receiverEmail, messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId
         });
       }
     });
