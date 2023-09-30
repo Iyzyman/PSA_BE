@@ -4,9 +4,11 @@ import { AppService } from './app.service';
 import { SupaMod } from './supabase/SupaMod';
 import { ChatModule } from './chat/chat.module';
 import { ListingsModule } from './listings/listings.module';
+import { ChatGateway } from './chat.gateway';
+
 @Module({
   imports: [SupaMod,ChatModule,ListingsModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,ChatGateway],
 })
 export class AppModule {}

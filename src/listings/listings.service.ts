@@ -38,7 +38,6 @@ export class ListingsService {
         if (error){
             throw error
         }
-        console.log(data)
         return data
     }
 
@@ -51,7 +50,6 @@ export class ListingsService {
         if (error){
             throw error
         }
-        console.log(data)
         return data
     }
 
