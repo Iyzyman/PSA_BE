@@ -1,5 +1,4 @@
 import { Injectable} from '@nestjs/common';
-import { type } from 'os';
 import { Supabase } from 'src/supabase/supabase';
 
 @Injectable()
@@ -75,6 +74,18 @@ export class ListingsService {
         const { data, error } = await client
         .from('listings')
         .delete()
+        .eq('id', listingId)
+        if (error){
+            throw error
+        }
+        return data
+    }
+
+    async sellListing(listingId: string): Promise<string> {
+        const client = this.supabase.getClient();
+        const { data, error } = await client
+        .from('listings')
+        .update({'sold': true})
         .eq('id', listingId)
         if (error){
             throw error
