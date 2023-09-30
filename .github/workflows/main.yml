@@ -11,10 +11,10 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v1.0.0
       with:
-        host: ${{ secrets.VM_HOST }}
-        username: ${{ secrets.VM_USER }}
-        password: ${{ secrets.VM_PASSWORD }}
-        port: ${{ secrets.VM_PORT }}
+        host: ec2-54-169-206-36.ap-southeast-1.compute.amazonaws.com
+        username: ubuntu
+        password: psapineapple123*
+        port: 22
         script: |
           whoami
           ls
