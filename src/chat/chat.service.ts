@@ -64,14 +64,14 @@ export class ChatService {
    
     const { data, error } = await client
     .from('Chat')
-    .select('')
+    .select('*, listings(account, containerType, destPort)')
     .or(`receiverEmail.eq.${Email},senderEmail.eq.${Email}`)
     .order('timestamp', { ascending: false });
   
     if (error) {
       throw error;
     }
-  
+   console.log(data);
     const userMessagesMap: Map<string, Message> = new Map();
     // Assuming data and Email are properly defined earlier in your code
     data.forEach((chat) => {
@@ -83,7 +83,7 @@ export class ChatService {
         // @ts-ignore
         const chatKey = `${chat.listingId}-${chat.senderEmail}`;
          // @ts-ignore
-        userMessagesMap.set(chatKey, {id:chat.id,senderEmail: chat.senderEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId
+        userMessagesMap.set(chatKey, {id:chat.id,senderEmail: chat.senderEmail,messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId,listingDetails: chat.listings
         });
       }
       // Check if receiverEmail is not the same as the specified Email and if it's not already in the map
@@ -92,7 +92,7 @@ export class ChatService {
         // @ts-ignore
         const chatKey=`${chat.listingId}-${chat.receiverEmail}`;
          // @ts-ignore
-        userMessagesMap.set(chatKey, {id:chat.id,senderEmail: chat.receiverEmail, messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId
+        userMessagesMap.set(chatKey, {id:chat.id,senderEmail: chat.receiverEmail, messageContent: chat.messageContent,timestamp: chat.timestamp,listingId: chat.listingId,listingDetails: chat.listings
         });
       }
     });
