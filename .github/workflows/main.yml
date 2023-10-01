@@ -22,11 +22,10 @@ jobs:
           USER_NAME: ${{ secrets.VM_USER }}
         run: |
           sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no ${USER_NAME}@${HOSTNAME} '
-            source ~/.bashrc &&
-            cd PSA_BE &&
-            git pull origin main &&
-            sudo npm install &&
-            sudo npm run build &&
-            sudo pm2 restart backend
+            cd PSA_BE
+            git pull origin
+            docker pull iyzyman/dev:latest 
+            docker stop psabackend
+            docker start psabackend
           '
 
