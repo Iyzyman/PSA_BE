@@ -82,7 +82,7 @@ export class ListingsService {
         const client = this.supabase.getClient();
         const { data, error } = await client
         .from('listings')
-        .update({'sold': true})
+        .update({sold: true})
         .eq('id', listingId)
         if (error){
             throw error
