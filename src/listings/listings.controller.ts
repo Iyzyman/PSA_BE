@@ -16,6 +16,7 @@ export class ListingsController {
 
   @Post()
   insertListing(
+    @Body('leasingOwner') leasingOwner: string,
     @Body('account') account: string,
     @Body('cargoSize') cargoSize: number,
     @Body('loadPort') loadPort: string,
@@ -26,19 +27,23 @@ export class ListingsController {
     @Body('typeDangGoods') typeDangGoods: string,
     @Body('price') price: number
   ) {
-    const generatedId = this.listingService.insertListing(
-      account,
-      cargoSize,
-      loadPort,
-      destPort,
-      leaveDate,
-      reachDate,
-      containerType,
-      typeDangGoods,
-      price,
-    );
-
-    return { id: generatedId };
+    try{
+      const generatedId = this.listingService.insertListing(
+        leasingOwner,
+        account,
+        cargoSize,
+        loadPort,
+        destPort,
+        leaveDate,
+        reachDate,
+        containerType,
+        typeDangGoods,
+        price,
+      );
+      return {'status': 200}
+    }catch(error){
+      return {'status': 400}
+    }
   }
 
   @Get()
@@ -81,14 +86,22 @@ export class ListingsController {
 
   @Delete(':id')
   removeListing(@Param('id') listingId: string) {
-      this.listingService.deleteListing(listingId);
-      return null;
+    try{
+        this.listingService.deleteListing(listingId);
+        return {'status': 200};
+    }catch(error){
+      return {'status': 400}
+    }
   }
 
   @Patch('/sell/:id')
   sellListing(@Param('id') listingId: string) {
-    this.listingService.sellListing(listingId);
-    return null;
+    try{    
+      this.listingService.sellListing(listingId);
+      return {'status': 200};
+    }catch(error){
+      return {'status': 400}
+    }
   }
 
 }
