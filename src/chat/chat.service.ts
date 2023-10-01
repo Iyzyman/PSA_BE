@@ -98,7 +98,6 @@ export class ChatService {
     });
     
     // Convert the map values to an array to return
-    console.log(Array.from(userMessagesMap.values()))
     return Array.from(userMessagesMap.values());
   
 }
