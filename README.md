@@ -1,3 +1,21 @@
+# PSA Codesprint Hackathon Backend
+
+This project was developed for the PSA Codesprint hackathon, focusing on the backend development.
+
+## About
+
+This project provided a great learning experience, enabling us to explore NestJS and implement websockets for building a real-time chat function. Additionally, it allowed me to apply my cloud knowledge to host the application on Amazon EC2 servers.
+
+## Technologies Used
+
+- **NestJS**: We chose NestJS as our backend framework, which helped us streamline our development process and create robust APIs.
+- **Websockets**: To provide real-time chat functionality, we implemented WebSockets, enabling seamless communication between users.
+- **Amazon EC2**: Leveraging my cloud knowledge, we hosted the dockerized application on Amazon Elastic Compute Cloud (EC2) servers for scalability and reliability.
+
+
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
