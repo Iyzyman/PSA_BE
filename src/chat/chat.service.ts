@@ -45,7 +45,7 @@ export class ChatService {
     if (error || error2) {
         throw error || error2;
       }
-
+    console.log(combinedData);
     return combinedData;
   }
   async createChatMessage(messageData: { senderEmail: string, receiverEmail: string, messageContent: string }): Promise<any> {

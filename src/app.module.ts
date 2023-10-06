@@ -5,9 +5,10 @@ import { SupaMod } from './supabase/SupaMod';
 import { ChatModule } from './chat/chat.module';
 import { ListingsModule } from './listings/listings.module';
 import { ChatGateway } from './chat.gateway';
+import { HealthModule } from './health/health.module';
 
 @Module({
-  imports: [SupaMod,ChatModule,ListingsModule],
+  imports: [SupaMod,ChatModule,ListingsModule, HealthModule],
   controllers: [AppController],
   providers: [AppService,ChatGateway],
 })
